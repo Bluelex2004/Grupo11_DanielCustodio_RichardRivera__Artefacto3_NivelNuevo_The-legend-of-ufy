@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdmc30hh1i453"]
+
+[ext_resource type="Script" path="res://scenes/game/levels/objects/Barco/Script_rigid_body_2d_Bomba.gd" id="1_ns15i"]
+[ext_resource type="Texture2D" uid="uid://bmi3uko8mfudp" path="res://assets/sprites/Malo/fireball.png" id="1_vhael"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n155t"]
+size = Vector2(32, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eoti4"]
+size = Vector2(32, 23)
+
+[sub_resource type="Animation" id="Animation_l1cpe"]
+resource_name = "MovimientoBomvba"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireball:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_oh3d2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireball:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtxnf"]
+_data = {
+"MovimientoBomvba": SubResource("Animation_l1cpe"),
+"RESET": SubResource("Animation_oh3d2")
+}
+
+[node name="rigid_body_2d_Bomba" type="RigidBody2D"]
+position = Vector2(577, 303)
+collision_layer = 16384
+script = ExtResource("1_ns15i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_n155t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_eoti4")
+
+[node name="Fireball" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(2, -2)
+texture = ExtResource("1_vhael")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rtxnf")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkyroidbh0t4a"]
+
+[ext_resource type="Texture2D" uid="uid://cbjxf8fbobxmh" path="res://scenes/game/levels/objects/Mar/Fondo.jpg" id="1_45ww8"]
+[ext_resource type="PackedScene" uid="uid://dc00g1xs7e3u4" path="res://scenes/game/levels/objects/Barco/node_2d_barco.tscn" id="2_53y31"]
+[ext_resource type="PackedScene" uid="uid://ca3ueo0yewjov" path="res://scenes/game/characters/main_character/main_character.tscn" id="4_fhmdt"]
+[ext_resource type="Script" path="res://scenes/game/levels/rooms/scene_4/Script_Camera2D.gd" id="5_urmv8"]
+[ext_resource type="PackedScene" uid="uid://bcwbptqi3ur6a" path="res://scenes/game/enemy/node_2d_boss.tscn" id="6_3cr7h"]
+[ext_resource type="PackedScene" uid="uid://do64tycaerr2f" path="res://scenes/game/levels/objects/Barco/node_2d_Cañon.tscn" id="7_mybj6"]
+[ext_resource type="PackedScene" uid="uid://cdmc30hh1i453" path="res://scenes/game/levels/objects/Barco/rigid_body_2d_Bomba.tscn" id="7_u81si"]
+
+[node name="Node2D_scene4" type="Node2D"]
+
+[node name="Fondo" type="Sprite2D" parent="."]
+position = Vector2(459, 271)
+scale = Vector2(0.605828, 0.605828)
+texture = ExtResource("1_45ww8")
+
+[node name="Node2D_Barco" parent="." instance=ExtResource("2_53y31")]
+position = Vector2(106, 439)
+
+[node name="node_2d_Cañon" parent="Node2D_Barco" instance=ExtResource("7_mybj6")]
+position = Vector2(-127, -56)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("character")]
+limit_left = 50
+limit_right = 850
+limit_bottom = 570
+script = ExtResource("5_urmv8")
+character = NodePath("../MainCharacter")
+
+[node name="Node2D_Boss" parent="." instance=ExtResource("6_3cr7h")]
+position = Vector2(-276, -5)
+
+[node name="rigid_body_2d_Bomba" parent="Node2D_Boss" instance=ExtResource("7_u81si")]
+position = Vector2(676, 448)
+
+[node name="MainCharacter" parent="." instance=ExtResource("4_fhmdt")]
+position = Vector2(161, 412)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj43g8blibchk"]
+
+[ext_resource type="Texture2D" uid="uid://m2krrs2fx3r5" path="res://scenes/game/levels/objects/Barco/barrel_red.png" id="1_fxnta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bemr"]
+radius = 20.0
+
+[node name="RigidBody2D_Ruedas" type="RigidBody2D"]
+
+[node name="BarrelRed" type="Sprite2D" parent="."]
+texture = ExtResource("1_fxnta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2bemr")

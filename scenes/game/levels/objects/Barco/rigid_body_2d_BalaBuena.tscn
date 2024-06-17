@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ntw0eu73ne64"]
+
+[ext_resource type="Script" path="res://scenes/game/levels/objects/Barco/Script_rigid_body_2d_BalaBuena.gd" id="1_4t43w"]
+[ext_resource type="Texture2D" uid="uid://bg6ulk5xchh0b" path="res://assets/sprites/Malo/bullet.png" id="1_iy0tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4khc"]
+size = Vector2(22, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3h535"]
+size = Vector2(22, 16)
+
+[node name="rigid_body_2d_BalaBuena" type="RigidBody2D"]
+position = Vector2(248, 162)
+script = ExtResource("1_4t43w")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+position = Vector2(-5.33587, -0.664131)
+scale = Vector2(-1.54198, 1.54198)
+texture = ExtResource("1_iy0tw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7, 4)
+shape = SubResource("RectangleShape2D_g4khc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 4)
+shape = SubResource("RectangleShape2D_3h535")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
